@@ -12,15 +12,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:background="@color/bg"
-        android:layout_marginHorizontal="50dp">
+        android:background="@drawable/auth_bg"
+        android:layout_marginHorizontal="30dp"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="50dp"
@@ -43,17 +45,29 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/et_bg"
+            android:background="@drawable/et_bg"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="10dp"
+            android:padding="10dp"
+            android:hint="Username"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="10dp"
         />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/et_bg"
+            android:background="@drawable/et_bg"
             android:layout_marginHorizontal="10dp"
+            android:padding="10dp"
+            android:hint="Password"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawablePadding="10dp"
         />
 
         <com.google.android.material.button.MaterialButton
@@ -73,7 +87,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginVertical="20dp">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -10,4 +10,5 @@
     <color name="primary">#251e3e</color>
     <color name="dodger">#1e90ff</color>
     <color name="bg">#33000000</color>
+    <color name="et_bg">#111827</color>
 </resources>

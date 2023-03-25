@@ -61,6 +61,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_3"
         android:layout_below="@id/layout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,23 +108,20 @@
             android:layout_weight="1"
         />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send message"
-            android:backgroundTint="#E91E63"
-            app:cornerRadius="5dp"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="10dp"
-        />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-        />
-
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send message"
+        android:backgroundTint="#E91E63"
+        app:cornerRadius="5dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:layout_below="@id/layout_3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+    />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.ghasty.incognito;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.google.android.material.button.MaterialButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, response -> {
             Log.d("Ghastyy", "Res: " + response.toString());
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+            saveUserData(response.toString());
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }, error -> {
             Log.d("Ghastyy", "Auth error: " + error.getLocalizedMessage());
             register.setVisibility(View.VISIBLE);
@@ -104,5 +111,26 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void saveUserData(String userData) {
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = openFileOutput("user.txt", MODE_PRIVATE);
+            fileOutputStream.write(userData.getBytes());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

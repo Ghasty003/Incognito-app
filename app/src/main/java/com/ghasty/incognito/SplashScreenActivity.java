@@ -9,7 +9,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private MaterialButton login, register;
+    private MaterialButton login, register, send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
+        send = findViewById(R.id.send);
 
         login.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
@@ -25,6 +26,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         register.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
+        });
+
+        send.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
         });
     }
 }

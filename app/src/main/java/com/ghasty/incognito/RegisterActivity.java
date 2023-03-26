@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     private MaterialButton register;
     private ProgressBar progressBar;
     private RequestQueue requestQueue;
-    Utils utils = new Utils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, response -> {
             Log.d("Ghastyy", "Res: " + response.toString());
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-
-            try {
-                utils.saveUserData(response.toString());
-            } catch (IOException e) {
-                Toast.makeText(utils, "Error saving user data: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-
+            saveUserData(response.toString());
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }, error -> {
@@ -118,5 +111,26 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void saveUserData(String userData) {
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = openFileOutput("user.txt", MODE_PRIVATE);
+            fileOutputStream.write(userData.getBytes());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

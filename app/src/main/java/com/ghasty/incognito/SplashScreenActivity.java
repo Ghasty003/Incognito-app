@@ -40,35 +40,5 @@ public class SplashScreenActivity extends AppCompatActivity {
         send.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
         });
-
-        try {
-//            getUserData();
-            Log.d("Ghastyy", getUserData());
-        } catch (IOException e) {
-            Log.d("Ghastyy", "No exist" + e.getLocalizedMessage());
-        }
-    }
-
-
-    private String getUserData() throws IOException {
-        FileInputStream fileInputStream = openFileInput("user.txt");
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        StringBuilder sb = new StringBuilder();
-        String text = null;
-
-        do {
-            sb.append(text).append("\n");
-        } while ((text = bufferedReader.readLine()) != null);
-
-        if (fileInputStream != null) {
-            try {
-                fileInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return sb.toString();
     }
 }

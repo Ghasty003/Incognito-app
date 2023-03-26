@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText username, password;
     private MaterialButton register;
+    private ProgressBar progressBar;
     private RequestQueue requestQueue;
 
     @Override
@@ -32,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
+        progressBar = findViewById(R.id.progress_bar);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -51,6 +56,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        register.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", username.getText().toString());
         jsonObject.put("password", password.getText().toString());
@@ -60,8 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
         String url = "https://incognito-j4hs.onrender.com/auth/signup";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, response -> {
             Log.d("Ghastyy", "Res: " + response.toString());
+            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
         }, error -> {
             Log.d("Ghastyy", "Auth error: " + error.getLocalizedMessage());
+            register.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+
         }) {
             @Override
             public Map<String, String> getHeaders() {

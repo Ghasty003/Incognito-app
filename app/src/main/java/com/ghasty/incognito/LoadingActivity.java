@@ -2,7 +2,9 @@ package com.ghasty.incognito;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -18,9 +20,16 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
         try {
-//            getUserData();
-            Log.d("Ghastyy", getUserData());
+            String userData = getUserData();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userData", userData);
+            new Handler().postDelayed(() -> {
+                startActivity(intent);
+            }, 2000);
         } catch (IOException e) {
+            new Handler().postDelayed(() -> {
+                startActivity(new Intent(this, SplashScreenActivity.class));
+            }, 2000);
             Log.d("Ghastyy", "No exist" + e.getLocalizedMessage());
         }
     }

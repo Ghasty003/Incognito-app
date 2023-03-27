@@ -19,18 +19,26 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+
         try {
             String userData = getUserData();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("userData", userData);
-            new Handler().postDelayed(() -> {
-                startActivity(intent);
-            }, 2000);
+            if (!userData.equals("")) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("userData", userData);
+                new Handler().postDelayed(() -> {
+                    startActivity(intent);
+                }, 2000);
+
+            } else {
+                new Handler().postDelayed(() -> {
+                    startActivity(new Intent(this, SplashScreenActivity.class));
+                }, 2000);
+            }
         } catch (IOException e) {
             new Handler().postDelayed(() -> {
                 startActivity(new Intent(this, SplashScreenActivity.class));
             }, 2000);
-            Log.d("Ghastyy", "No exist" + e.getLocalizedMessage());
+            Log.d("Ghastyy", "No exist: " + e.getLocalizedMessage());
         }
     }
 
@@ -53,7 +61,7 @@ public class LoadingActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
+        
         return sb.toString();
     }
 }

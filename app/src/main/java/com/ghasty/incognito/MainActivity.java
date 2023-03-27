@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private Button logout;
+    private TextView tv_username;
 
     String userData;
     String username;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         logout = findViewById(R.id.logout);
+        tv_username = findViewById(R.id.user_name);
 
         try {
             userData = getUserData();
@@ -38,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             username = convertDataToJson().getString("username");
-            Log.d("Ghastyy", "init: " + username);
+            String st_username = username + "'s";
+            tv_username.setText(st_username);
         } catch (JSONException e) {
             Log.d("Ghastyy", e.getLocalizedMessage());
         }

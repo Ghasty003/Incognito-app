@@ -1,6 +1,8 @@
 package com.ghasty.incognito;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,14 +18,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button logout;
     private TextView tv_username;
+    private RecyclerView recyclerView;
 
     String userData;
     String username;
+
+    List<MessageModel> messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
         tv_username = findViewById(R.id.user_name);
+        recyclerView = findViewById(R.id.rv_messages);
+
+        messages = new ArrayList<>();
+
+        messages.add(new MessageModel("Hi bro", "jan 2"));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new MessageAdapter(this, messages));
 
         try {
             userData = getUserData();

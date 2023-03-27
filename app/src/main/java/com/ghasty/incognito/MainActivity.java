@@ -7,16 +7,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private Button logout;
 
     String userData;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +30,30 @@ public class MainActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
 
-
         try {
             userData = getUserData();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Log.d("Ghastyy", "here: " + userData);
+
+        try {
+            username = convertDataToJson().getString("username");
+            Log.d("Ghastyy", "init: " + username);
+        } catch (JSONException e) {
+            Log.d("Ghastyy", e.getLocalizedMessage());
+        }
 
 
         logout.setOnClickListener(v -> {
             clearUserData();
             startActivity(new Intent(this, SplashScreenActivity.class));
         });
+    }
+
+    private JSONObject convertDataToJson() throws JSONException {
+        JSONObject jsonObject = new JSONObject(userData);
+
+        return jsonObject;
     }
 
     private void clearUserData() {
@@ -57,18 +73,14 @@ public class MainActivity extends AppCompatActivity {
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         StringBuilder sb = new StringBuilder();
-        String text = null;
+        String text;
 
-        do {
-            sb.append(text).append("\n");
-        } while ((text = bufferedReader.readLine()) != null);
+        while ((text = bufferedReader.readLine()) != null) {
+            sb.append(text);
+        }
 
         if (fileInputStream != null) {
-            try {
-                fileInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fileInputStream.close();
         }
 
         return sb.toString();

@@ -22,9 +22,8 @@ public class LoadingActivity extends AppCompatActivity {
 
         try {
             String userData = getUserData();
-            if (!userData.equals("")) {
+            if (!userData.contains("logout")) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("userData", userData);
                 new Handler().postDelayed(() -> {
                     startActivity(intent);
                 }, 2000);

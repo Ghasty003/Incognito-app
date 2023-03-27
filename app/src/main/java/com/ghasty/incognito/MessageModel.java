@@ -1,13 +1,18 @@
 package com.ghasty.incognito;
 
 public class MessageModel {
-    String message;
+    private String message, createdAt;
 
-    public MessageModel(String message) {
+    public MessageModel(String message, String createdAt) {
         this.message = message;
+        this.createdAt = createdAt;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 }

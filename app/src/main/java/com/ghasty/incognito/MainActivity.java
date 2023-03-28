@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private Button logout;
-    private TextView tv_username;
+    private TextView tv_username, count;
     private RecyclerView recyclerView;
 
     String userData;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
         tv_username = findViewById(R.id.user_name);
+        count = findViewById(R.id.count);
         recyclerView = findViewById(R.id.rv_messages);
 
         requestQueue = Volley.newRequestQueue(this);
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
     private void getMessages() {
         String url = "https://incognito-j4hs.onrender.com/message?user=" + username;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
+
+            String totalMessages = "(" + response.length() + ")";
+            count.setText(totalMessages);
 
             try {
                 for (int i = 0; i < response.length(); i++) {

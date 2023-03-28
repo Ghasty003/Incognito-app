@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         messages = new ArrayList<>();
 
-        messages.add(new MessageModel("Hi bro", "jan 2"));
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MessageAdapter(this, messages));
 
         try {
             userData = getUserData();
@@ -89,7 +92,21 @@ public class MainActivity extends AppCompatActivity {
     private void getMessages() {
         String url = "https://incognito-j4hs.onrender.com/message?user=" + username;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
-            Log.d("Ghastyy", response.toString());
+
+            try {
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    String message = jsonObject.getString("message");
+                    String createdAt = jsonObject.getString("createdAt");
+                    String format = createdAt.split("T")[0];
+
+                    messages.add(new MessageModel(message, format));
+                }
+
+                recyclerView.setAdapter(new MessageAdapter(this, messages));
+            } catch (Exception e) {
+                Log.d("Ghastyy", "Unable to get: " + e.getLocalizedMessage());
+            }
         }, error -> {
             Log.d("Ghastyy", "Except: " + error.getLocalizedMessage());
         }) {

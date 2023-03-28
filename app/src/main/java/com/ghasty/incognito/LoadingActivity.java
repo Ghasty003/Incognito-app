@@ -26,16 +26,19 @@ public class LoadingActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 new Handler().postDelayed(() -> {
                     startActivity(intent);
+                    finish();
                 }, 2000);
 
             } else {
                 new Handler().postDelayed(() -> {
                     startActivity(new Intent(this, SplashScreenActivity.class));
+                    finish();
                 }, 2000);
             }
         } catch (IOException e) {
             new Handler().postDelayed(() -> {
                 startActivity(new Intent(this, SplashScreenActivity.class));
+                finish();
             }, 2000);
             Log.d("Ghastyy", "No exist: " + e.getLocalizedMessage());
         }

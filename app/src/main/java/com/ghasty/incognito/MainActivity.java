@@ -3,6 +3,7 @@ package com.ghasty.incognito;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Build;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logout;
     private TextView tv_username, count;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     String userData;
     String username;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         tv_username = findViewById(R.id.user_name);
         count = findViewById(R.id.count);
         recyclerView = findViewById(R.id.rv_messages);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -88,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
             clearUserData();
             startActivity(new Intent(this, SplashScreenActivity.class));
         });
+
+
+        /*
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getMessages();
+            swipeRefreshLayout.setRefreshing(false);
+        }); */
     }
 
 

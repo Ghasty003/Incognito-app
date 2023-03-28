@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(v -> {
             clearUserData();
             startActivity(new Intent(this, SplashScreenActivity.class));
+            finish();
         });
 
 

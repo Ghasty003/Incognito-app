@@ -3,7 +3,9 @@ package com.ghasty.incognito;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private Button logout;
     private TextView tv_username, count;
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         tv_username = findViewById(R.id.user_name);
         count = findViewById(R.id.count);
+        progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.rv_messages);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
@@ -93,8 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getMessages() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
         String url = "https://incognito-j4hs.onrender.com/message?user=" + username;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
+
+            progressBar.setVisibility(View.GONE);
 
             String totalMessages = "(" + response.length() + ")";
             count.setText(totalMessages);

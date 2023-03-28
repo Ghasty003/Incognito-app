@@ -29,12 +29,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         login.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
-            finish();
         });
 
         register.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
-            finish();
         });
 
         send.setOnClickListener(v -> {

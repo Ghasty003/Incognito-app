@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setAdapter(new MessageAdapter(this, messages));
             } catch (Exception e) {
                 Log.d("Ghastyy", "Unable to get: " + e.getLocalizedMessage());
+                progressBar.setVisibility(View.GONE);
             }
         }, error -> {
             Toast.makeText(this, "Error fetching messages", Toast.LENGTH_SHORT).show();

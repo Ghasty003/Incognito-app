@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:text="Already have an account?"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 />
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="Register"
                 android:textColor="@color/dodger"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginHorizontal="5dp"
                 />
 

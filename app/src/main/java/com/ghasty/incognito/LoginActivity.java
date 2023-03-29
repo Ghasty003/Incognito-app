@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
+    private TextView register;
     private MaterialButton login;
     private ProgressBar progressBar;
 
@@ -40,8 +42,13 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
+        register = findViewById(R.id.register_text);
         progressBar = findViewById(R.id.progress_bar);
         login = findViewById(R.id.login);
+
+        register.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
 
         login.setOnClickListener(v -> {
             try {

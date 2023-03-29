@@ -44,6 +44,7 @@
             android:paddingVertical="15dp"
             android:paddingHorizontal="40dp"
             app:cornerRadius="10dp"
+            android:drawableStart="@drawable/baseline_send_24"
         />
 
     </LinearLayout>

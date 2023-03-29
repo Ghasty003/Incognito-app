@@ -21,7 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 
 public class SendMessageActivity extends AppCompatActivity {
-    private TextView userView;
+    private TextView userView, errorMessage;
     private MaterialButton sendMessage;
     private EditText message;
 
@@ -38,6 +38,7 @@ public class SendMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_message);
 
         userView = findViewById(R.id.username);
+        errorMessage = findViewById(R.id.error_message);
         sendMessage = findViewById(R.id.mb_send);
         message = findViewById(R.id.et_message);
 
@@ -50,6 +51,9 @@ public class SendMessageActivity extends AppCompatActivity {
         String userText = "Send a secret message to " + username;
 
         userView.setText(userText);
+
+        String error_message = "No such user with the username " + username;
+        errorMessage.setText(error_message);
 
         requestQueue = Volley.newRequestQueue(this);
 

@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Send secret message to John"
+            android:text="Send secret message to John"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:layout_gravity="center_horizontal"
@@ -30,9 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/auth_bg"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="#484267"
             android:layout_margin="20dp"
             android:focusedByDefault="true"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:padding="5dp"
         />
 
         <com.google.android.material.button.MaterialButton
@@ -41,10 +44,10 @@
             android:layout_gravity="center_horizontal"
             android:text="Send"
             android:backgroundTint="@color/dodger"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="40dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="30dp"
             app:cornerRadius="10dp"
-            android:drawableStart="@drawable/baseline_send_24"
+            android:drawableLeft="@drawable/baseline_send_24"
         />
 
     </LinearLayout>

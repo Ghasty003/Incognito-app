@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,9 @@ public class SendMessageActivity extends AppCompatActivity {
 
     private String username;
 
+    private View messageView, view404;
+    private ProgressBar progressBar;
+
     private RequestQueue requestQueue;
 
     @Override
@@ -35,6 +40,11 @@ public class SendMessageActivity extends AppCompatActivity {
         userView = findViewById(R.id.username);
         sendMessage = findViewById(R.id.mb_send);
         message = findViewById(R.id.et_message);
+
+        progressBar = findViewById(R.id.progress_bar);
+        messageView = findViewById(R.id.message_layout);
+        view404 = findViewById(R.id.layout_404);
+
 
         username = getIntent().getStringExtra("username");
         String userText = "Send a secret message to " + username;
@@ -52,9 +62,18 @@ public class SendMessageActivity extends AppCompatActivity {
         Log.d("Ghastyy", "starting..");
 
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
-            Log.d("Ghastyy", response);
-            Log.d("Ghastyy", String.valueOf(response.equals("true")));
+            progressBar.setVisibility(View.GONE);
+
+            if (response.equals("true")) {
+                messageView.setVisibility(View.VISIBLE);
+                return;
+            }
+
+            view404.setVisibility(View.VISIBLE);
+
         }, error -> {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             Log.d("Ghastyy", "Except: " + error.getLocalizedMessage());
         });
 

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText username, password;
+    private TextView login;
     private MaterialButton register;
     private ProgressBar progressBar;
     private RequestQueue requestQueue;
@@ -40,9 +42,14 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
+        login = findViewById(R.id.login);
         progressBar = findViewById(R.id.progress_bar);
 
         requestQueue = Volley.newRequestQueue(this);
+
+        login.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
 
         register.setOnClickListener(v -> {
             try {

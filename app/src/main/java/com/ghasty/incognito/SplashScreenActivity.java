@@ -36,7 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
 
         send.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, SendMessageActivity.class));
         });
     }
 }

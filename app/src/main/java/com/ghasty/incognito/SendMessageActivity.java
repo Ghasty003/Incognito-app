@@ -36,7 +36,7 @@ public class SendMessageActivity extends AppCompatActivity {
     private String username;
 
     private View messageView, view404;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar, sendMessageProgress;
 
     private RequestQueue requestQueue;
 
@@ -51,6 +51,8 @@ public class SendMessageActivity extends AppCompatActivity {
         message = findViewById(R.id.et_message);
 
         progressBar = findViewById(R.id.progress_bar);
+        sendMessageProgress = findViewById(R.id.send_progress_bar);
+
         messageView = findViewById(R.id.message_layout);
         view404 = findViewById(R.id.layout_404);
 
@@ -86,8 +88,15 @@ public class SendMessageActivity extends AppCompatActivity {
         jsonObject.put("message", message.getText().toString());
         jsonObject.put("receiver", username);
 
+        message.getText().clear();
+        sendMessage.setVisibility(View.GONE);
+        sendMessageProgress.setVisibility(View.VISIBLE);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, response -> {
             Log.d("Ghastyy", response.toString());
+            sendMessage.setVisibility(View.VISIBLE);
+            sendMessageProgress.setVisibility(View.GONE);
+            Toast.makeText(this, "Message sent successfully", Toast.LENGTH_SHORT).show();
         }, error -> {
             Log.d("Ghastyy", "Except error: " + error.getLocalizedMessage());
 
